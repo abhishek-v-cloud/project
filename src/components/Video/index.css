@@ -1,0 +1,44 @@
+.trailer-text {
+  display: flex;
+}
+.video-title {
+  color: white;
+}
+
+.trailer-text p {
+  text-indent: 190px;
+}
+
+.logo {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.search {
+  background-color: #222;
+  padding: 10px 20px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  margin-right: 15%;
+}
+
+.search input {
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 0 10px;
+  font-size: 16px;
+}
+.search input::placeholder {
+  color: #ccc;
+}
+
+.search button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+  margin-left: 10px;
+}

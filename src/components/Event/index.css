@@ -1,0 +1,91 @@
+.event-list {
+  padding: 40px;
+  max-width: 1200px;
+  margin: auto;
+  background: rgba(20, 20, 20, 0.95); /* Dark semi-transparent background */
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Title */
+.event-list h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #00d4ff; /* Neon blue */
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+  margin-bottom: 30px;
+}
+
+/* Events container */
+.events {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Event cards */
+.event-card {
+  background: linear-gradient(145deg, #1b1b1b, #141414);
+  border-radius: 12px;
+  padding: 20px;
+  width: 320px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+
+/* Neon hover effect */
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+}
+
+/* Event title */
+.event-card h2 {
+  font-size: 1.6rem;
+  color: #ff007f; /* Neon pink */
+  text-shadow: 0 0 8px rgba(255, 0, 127, 0.8);
+  margin-bottom: 10px;
+  transition: color 0.3s ease-in-out;
+}
+
+.event-card h2:hover {
+  color: #ff4da6; /* Lighter pink on hover */
+}
+
+/* Event details */
+.event-card p {
+  font-size: 1rem;
+  color: #b0b0b0;
+  margin: 5px 0;
+}
+
+/* Participate Button */
+.event-card button {
+  background: #00d4ff;
+  color: #0a0a0a;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  text-transform: uppercase;
+  transition:
+    background 0.3s,
+    transform 0.2s;
+}
+
+/* Button hover effect */
+.event-card button:hover {
+  background: #0094cc;
+  transform: scale(1.05);
+}
