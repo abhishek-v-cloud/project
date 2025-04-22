@@ -1,109 +1,91 @@
 .home-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-  padding-top: 10px;
-  padding-bottom: 50px;
-  width: 90%;
-  max-width: 1110px;
-}
-
-@media screen and (min-width: 768px) {
-  .home-container {
-    flex-direction: row;
-    justify-content: space-between;
-    padding-top: 96px;
-  }
+  justify-content: space-between;
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+  margin-bottom: 40px;
 }
 
 .home-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-@media screen and (min-width: 768px) {
-  .home-content {
-    align-items: flex-start;
-  }
-}
-
-.home-mobile-img {
-  width: 206px;
-}
-
-@media screen and (min-width: 768px) {
-  .home-mobile-img {
-    display: none;
-  }
-}
-
-.home-desktop-img {
-  width: 50%;
-  max-width: 450px;
-  margin-left: 85px;
-}
-
-@media screen and (max-width: 767px) {
-  .home-desktop-img {
-    display: none;
-  }
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .home-heading {
-  color: #1e293b;
-  font-family: 'Roboto';
+  font-size: 32px;
   font-weight: bold;
-  font-size: 30px;
-  line-height: 1.2;
-  text-align: center;
-}
-
-@media screen and (min-width: 768px) {
-  .home-heading {
-    font-size: 46px;
-    text-align: left;
-  }
+  color: #1e293b;
+  margin-bottom: 20px;
 }
 
 .home-description {
-  font-family: 'Roboto';
-  margin-top: 36px;
-  font-size: 14px;
-  line-height: 28px;
-  color: #64748b;
-  margin-bottom: 0px;
-  text-align: center;
-}
-
-@media screen and (min-width: 768px) {
-  .home-description {
-    font-size: 18px;
-    margin-top: 0px;
-    text-align: left;
-  }
+  font-size: 16px;
+  color: #475569;
+  margin-bottom: 24px;
+  line-height: 1.6;
 }
 
 .shop-now-button {
-  font-size: 14px;
-  font-weight: 400;
-  font-family: 'Roboto';
-  color: #ffffff;
+  background-color: #2874f0;
+  color: white;
   border: none;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding: 12px 24px;
+  font-size: 16px;
   border-radius: 6px;
-  background-color: #0967d2;
-  margin-top: 20px;
   cursor: pointer;
-  outline: none;
+  transition: background-color 0.3s ease;
 }
 
-@media screen and (min-width: 768px) {
-  .shop-now-button {
-    width: 150px;
-    font-size: 16px;
+.shop-now-button:hover {
+  background-color: #0f5bd8;
+}
+
+/* Image styling */
+.home-mobile-img {
+  width: 100%;
+  max-width: 400px;
+  display: block;
+  margin: 20px auto;
+}
+
+.home-desktop-img {
+  display: none;
+  width: 50%;
+  max-width: 600px;
+  border-radius: 8px;
+}
+
+/* Reverse image order for second block */
+.order-img {
+  order: -1;
+}
+
+/* Responsive styles for desktop */
+@media screen and (min-width: 992px) {
+  .home-container {
+    flex-direction: row;
+    align-items: center;
+    padding: 60px 80px;
+  }
+
+  .home-content {
+    text-align: left;
+    margin: 0;
+  }
+
+  .home-mobile-img {
+    display: none;
+  }
+
+  .home-desktop-img {
+    display: block;
+    margin-left: 40px;
+  }
+
+  .order-img {
+    margin-right: 40px;
+    margin-left: 0;
   }
 }

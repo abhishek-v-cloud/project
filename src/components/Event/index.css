@@ -1,20 +1,62 @@
-.event-list {
-  padding: 40px;
-  max-width: 1200px;
+.event-container {
+  padding: 20px 80px;
+  width: 100%;
   margin: auto;
-  background: rgba(20, 20, 20, 0.95); /* Dark semi-transparent background */
+  background-color: #141414f2; /* Dark semi-transparent background */
+  min-height: 100vh;
+  /* padding: 20px 50px;
+  width: 80%;
+  margin: auto;
+  background-color: #141414f2; 
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 15px #00000080;
+  min-height: 100vh; */
 }
 
 /* Title */
-.event-list h1 {
+.event-container h1 {
   text-align: center;
   font-size: 2.5rem;
   font-weight: 700;
   color: #00d4ff; /* Neon blue */
   text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
   margin-bottom: 30px;
+}
+
+.event-list-align {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 15px;
+}
+
+.event-search-input-container {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 8px;
+  padding-left: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-right: 16px;
+  width: 250px;
+}
+
+.event-search-input {
+  background-color: white;
+  color: black;
+  font-family: 'Roboto';
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  flex-grow: 1;
+}
+
+.event-search-icon {
+  color: black;
+  width: 20px;
+  height: 20px;
 }
 
 /* Events container */
@@ -45,6 +87,11 @@
 .event-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+}
+
+.event-card-logo-img {
+  width: 280px;
+  height: 200px;
 }
 
 /* Event title */
@@ -88,4 +135,8 @@
 .event-card button:hover {
   background: #0094cc;
   transform: scale(1.05);
+}
+
+.empty-list-msg {
+  color: white;
 }

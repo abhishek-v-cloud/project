@@ -104,32 +104,33 @@ class Carousel extends Component {
     const {trailerLists} = this.state
     return (
       <>
-        <div className='container'>
-          <div id='slide' ref={this.slideRef}>
+        <h1 className="nickname trailer-main-text">Watch New Trailers</h1>
+        <div className="container">
+          <div id="slide" ref={this.slideRef}>
             {trailerLists.map(item => (
               <div
                 key={item.trailerId}
-                className='item'
+                className="item"
                 style={{
                   backgroundImage: `url(${item.trailerImageUrl})`,
                 }}
               >
-                <div className='content'>
-                  <div className='name'>{item.trailerTitle}</div>
-                  <div className='des'>{item.trailerDescribe}</div>
+                <div className="content">
+                  <div className="name">{item.trailerTitle}</div>
+                  <div className="des">{item.trailerDescribe}</div>
 
                   <Link to={`/trailer/${item.trailerId}`}>
-                    <button type='button'>Watch Now</button>
+                    <button type="button">Watch Now</button>
                   </Link>
                 </div>
               </div>
             ))}
           </div>
-          <div className='buttons'>
-            <button id='prev' onClick={this.handleClickPrev}>
+          <div className="buttons">
+            <button id="prev" onClick={this.handleClickPrev}>
               <FontAwesomeIcon icon={faAngleLeft} />
             </button>
-            <button id='next' onClick={this.handleClickNext}>
+            <button id="next" onClick={this.handleClickNext}>
               <FontAwesomeIcon icon={faAngleRight} />
             </button>
           </div>
@@ -139,12 +140,16 @@ class Carousel extends Component {
   }
 
   renderTrailerFailureView = () => (
-    <img src='' alt='Register Prime' className='register-prime-image' />
+    <img
+      src="https://cdni.iconscout.com/illustration/premium/thumb/man-thinking-about-something-went-wrong-error-illustration-download-in-svg-png-gif-file-formats--result-page-message-empty-states-pack-design-development-illustrations-3780060.png"
+      alt="something went wrong"
+      className="register-prime-img"
+    />
   )
 
   renderLoadingView = () => (
-    <div className='primedeals-loader-container'>
-      <Loader type='ThreeDots' color='#0b69ff' height='50' width='50' />
+    <div className="primedeals-loader-container">
+      <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
     </div>
   )
 

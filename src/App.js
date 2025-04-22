@@ -1,87 +1,3 @@
-// import {Component} from 'react'
-// import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
-
-// import LoginForm from './components/LoginForm'
-// import Home from './components/Home'
-// import Products from './components/Products'
-// import ProductItemDetails from './components/ProductItemDetails'
-// import AdminHome from './components/AdminHome'
-// import Cart from './components/Cart'
-// import NotFound from './components/NotFound'
-// import ProtectedRoute from './components/ProtectedRoute'
-// import CartContext from './context/CartContext'
-// import RegisterForm from './components/RegisterForm'
-// import Video from './components/Video'
-// import Event from './components/Event'
-// import EventFormPage from './components/EventFormPage'
-// import WatchTrailer from './components/WatchTrailer'
-// import WatchVideo from './components/WatchVideo'
-
-// import './App.css'
-
-// class App extends Component {
-//   state = {
-//     cartList: [],
-//   }
-
-//   addCartItem = product => {
-//     this.setState(prevState => ({cartList: [...prevState.cartList, product]}))
-//   }
-
-//   deleteCartItem = () => {}
-
-//   render() {
-//     const {cartList} = this.state
-
-//     return (
-//       <BrowserRouter>
-//         <CartContext.Provider
-//           value={{
-//             cartList,
-//             addCartItem: this.addCartItem,
-//             deleteCartItem: this.deleteCartItem,
-//           }}
-//         >
-//           <Switch>
-//             <Route exact path="/login" component={LoginForm} />
-//             <Route exact path="/register" component={RegisterForm} />
-//             <ProtectedRoute exact path="/" component={Home} />
-//             <ProtectedRoute exact path="/products" component={Products} />
-//             <ProtectedRoute exact path="/adminhome" component={AdminHome} />
-//             <ProtectedRoute
-//               exact
-//               path="/products/:id"
-//               component={ProductItemDetails}
-//             />
-
-//             <ProtectedRoute exact path="/video" component={Video} />
-//             <ProtectedRoute
-//               exact
-//               path="/trailer/:trailerId"
-//               component={WatchTrailer}
-//             />
-//             <ProtectedRoute
-//               exact
-//               path="/video/:videoId"
-//               component={WatchVideo}
-//             />
-//             <ProtectedRoute exact path="/event" component={Event} />
-//             <ProtectedRoute
-//               exact
-//               path="/eventform/:eventId"
-//               component={EventFormPage}
-//             />
-//             <ProtectedRoute exact path="/cart" component={Cart} />
-//             <Route path="/not-found" component={NotFound} />
-//             <Redirect to="not-found" />
-//           </Switch>
-//         </CartContext.Provider>
-//       </BrowserRouter>
-//     )
-//   }
-// }
-
-// export default App
 import {Component} from 'react'
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
 
@@ -101,6 +17,20 @@ import EventFormPage from './components/EventFormPage'
 import WatchTrailer from './components/WatchTrailer'
 import WatchVideo from './components/WatchVideo'
 import Downloads from './components/Downloads'
+import PlayerStats from './components/PlayerStats'
+import OrderPage from './components/OrderPage'
+import ProfilePage from './components/ProfilePage'
+
+// admin
+import VideoUpload from './components/VideoUpload'
+import TrailerUpload from './components/TrailerUpload'
+import GamesUpload from './components/GamesUpload'
+import ProductManagement from './components/ProductManagement'
+import EventManager from './components/EventManager'
+import ProtectedAdminRoute from './components/ProtectedAdminRoute'
+import HostPage from './components/HostPage'
+import AudiencePage from './components/AudiencePage'
+import SeeOrder from './components/SeeOrder'
 
 import './App.css'
 
@@ -229,7 +159,58 @@ class App extends Component {
               {/* Protected Routes */}
               <ProtectedRoute exact path="/" component={Home} />
               <ProtectedRoute exact path="/products" component={Products} />
-              <ProtectedRoute exact path="/adminhome" component={AdminHome} />
+              {/* Admin Routes */}
+              <ProtectedAdminRoute
+                exact
+                path="/adminhome"
+                component={AdminHome}
+              />
+              <ProtectedAdminRoute
+                exact
+                path="/adminvideo"
+                component={VideoUpload}
+              />
+              <ProtectedAdminRoute
+                exact
+                path="/admintrailer"
+                component={TrailerUpload}
+              />
+              <ProtectedAdminRoute
+                exact
+                path="/admindownload"
+                component={GamesUpload}
+              />
+              <ProtectedAdminRoute
+                exact
+                path="/adminevents"
+                component={EventManager}
+              />
+              <ProtectedAdminRoute
+                exact
+                path="/livegame/host"
+                component={HostPage}
+              />
+              <ProtectedAdminRoute
+                exact
+                path="/adminproduct"
+                component={ProductManagement}
+              />
+              <ProtectedAdminRoute
+                exact
+                path="/adminorder"
+                component={SeeOrder}
+              />
+
+              {/* END Admin Routes */}
+
+              <ProtectedRoute
+                exact
+                path="/livegame/audience"
+                component={AudiencePage}
+              />
+
+              <ProtectedRoute exact path="/order" component={OrderPage} />
+
               <ProtectedRoute
                 exact
                 path="/products/:id"
@@ -253,6 +234,17 @@ class App extends Component {
                 component={EventFormPage}
               />
               <ProtectedRoute exact path="/downloads" component={Downloads} />
+              <ProtectedRoute
+                exact
+                path="/playerstats"
+                component={PlayerStats}
+              />
+              <ProtectedRoute
+                exact
+                path="/profilepage"
+                component={ProfilePage}
+              />
+
               <ProtectedRoute exact path="/cart" component={Cart} />
 
               {/* Auth Routes */}
@@ -271,3 +263,88 @@ class App extends Component {
 }
 
 export default App
+
+// import {Component} from 'react'
+// import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
+
+// import LoginForm from './components/LoginForm'
+// import Home from './components/Home'
+// import Products from './components/Products'
+// import ProductItemDetails from './components/ProductItemDetails'
+// import AdminHome from './components/AdminHome'
+// import Cart from './components/Cart'
+// import NotFound from './components/NotFound'
+// import ProtectedRoute from './components/ProtectedRoute'
+// import CartContext from './context/CartContext'
+// import RegisterForm from './components/RegisterForm'
+// import Video from './components/Video'
+// import Event from './components/Event'
+// import EventFormPage from './components/EventFormPage'
+// import WatchTrailer from './components/WatchTrailer'
+// import WatchVideo from './components/WatchVideo'
+
+// import './App.css'
+
+// class App extends Component {
+//   state = {
+//     cartList: [],
+//   }
+
+//   addCartItem = product => {
+//     this.setState(prevState => ({cartList: [...prevState.cartList, product]}))
+//   }
+
+//   deleteCartItem = () => {}
+
+//   render() {
+//     const {cartList} = this.state
+
+//     return (
+//       <BrowserRouter>
+//         <CartContext.Provider
+//           value={{
+//             cartList,
+//             addCartItem: this.addCartItem,
+//             deleteCartItem: this.deleteCartItem,
+//           }}
+//         >
+//           <Switch>
+//             <Route exact path="/login" component={LoginForm} />
+//             <Route exact path="/register" component={RegisterForm} />
+//             <ProtectedRoute exact path="/" component={Home} />
+//             <ProtectedRoute exact path="/products" component={Products} />
+//             <ProtectedRoute exact path="/adminhome" component={AdminHome} />
+//             <ProtectedRoute
+//               exact
+//               path="/products/:id"
+//               component={ProductItemDetails}
+//             />
+
+//             <ProtectedRoute exact path="/video" component={Video} />
+//             <ProtectedRoute
+//               exact
+//               path="/trailer/:trailerId"
+//               component={WatchTrailer}
+//             />
+//             <ProtectedRoute
+//               exact
+//               path="/video/:videoId"
+//               component={WatchVideo}
+//             />
+//             <ProtectedRoute exact path="/event" component={Event} />
+//             <ProtectedRoute
+//               exact
+//               path="/eventform/:eventId"
+//               component={EventFormPage}
+//             />
+//             <ProtectedRoute exact path="/cart" component={Cart} />
+//             <Route path="/not-found" component={NotFound} />
+//             <Redirect to="not-found" />
+//           </Switch>
+//         </CartContext.Provider>
+//       </BrowserRouter>
+//     )
+//   }
+// }
+
+// export default App

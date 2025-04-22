@@ -9,4 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: auto;
+  background-color: #060606f2;
+  font-family: 'Roboto';
 }

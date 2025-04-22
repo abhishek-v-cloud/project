@@ -1,0 +1,14 @@
+.user-live-conatiner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: black;
+  color: cyan;
+  min-height: 90vh;
+  text-align: center;
+}
+
+.user-streaming-card {
+  margin-top: 20px;
+  min-width: 1000px;
+}

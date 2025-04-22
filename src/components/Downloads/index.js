@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import {BsSearch} from 'react-icons/bs'
 import Loader from 'react-loader-spinner'
 import Cookies from 'js-cookie'
 import Header from '../Header'
@@ -16,6 +17,7 @@ class Downloads extends Component {
   state = {
     gameDownloadLists: [],
     apiStatus: apiStatusConstants.initial,
+    searchQuery: '', // State to hold the search input
   }
 
   componentDidMount() {
@@ -96,17 +98,9 @@ class Downloads extends Component {
         const contentDisposition = response.headers.get('Content-Disposition')
         let fileName = `game_${gameId}.exe` // Default filename with .exe extension
 
-        // Check if the response contains a filename in the Content-Disposition header
-        // if (contentDisposition && contentDisposition.includes('attachment')) {
-        //   const matches = /filename="(.+)"/.exec(contentDisposition)
-        //   if (matches && matches[1]) {
-        //     fileName = matches[1] // Use the filename provided by the server
-        //   }
-        // }
-
         if (contentDisposition && contentDisposition.includes('attachment')) {
           const matches = /filename="(.+)"/.exec(contentDisposition)
-          const [, extractedFileName] = matches || [] // Destructure the array, extracting the filename
+          const [, extractedFileName] = matches || []
           if (extractedFileName) {
             fileName = extractedFileName // Use the filename provided by the server
           }
@@ -126,31 +120,63 @@ class Downloads extends Component {
     }
   }
 
+  // Search input handler
+  handleSearchChange = event => {
+    this.setState({searchQuery: event.target.value})
+  }
+
+  // Filter games by title based on search query
+  getFilteredGameList = () => {
+    const {gameDownloadLists, searchQuery} = this.state
+    return gameDownloadLists.filter(game =>
+      game.gameTitle.toLowerCase().includes(searchQuery.toLowerCase()),
+    )
+  }
+
   renderGameDownloadListView = () => {
-    const {gameDownloadLists} = this.state
+    const filteredGameList = this.getFilteredGameList()
+
     return (
       <>
         <Header />
-        <div className="event-list">
-          <h1>Download Games</h1>
-          <div className="events">
-            {gameDownloadLists.map(list => (
-              <div key={list.gameId} className="event-card">
-                <img
-                  className="game-download-logo-img"
-                  src={list.gameLogoImage}
-                  alt={list.gameTitle}
-                />
-                <h2>{list.gameTitle}</h2>
-                <p>{list.gameDescription}</p>
-                <button
-                  type="button"
-                  onClick={() => this.onClickDownload(list.gameId)} // Pass the gameId here
-                >
-                  Download
-                </button>
-              </div>
-            ))}
+        <div className="game-download-container">
+          {/* Search Input */}
+
+          <div className="game-download-align">
+            <h1>Download Games</h1>
+            <div className="game-download-search-input-container">
+              <input
+                type="text"
+                className="game-download-search-input"
+                placeholder="Search by game..."
+                value={this.state.searchQuery}
+                onChange={this.handleSearchChange}
+              />
+               <BsSearch className="event-search-icon" />
+            </div>
+          </div>
+          <div className="game-downloads">
+            {filteredGameList.length > 0 ? (
+              filteredGameList.map(list => (
+                <div key={list.gameId} className="event-card">
+                  <img
+                    className="game-download-logo-img"
+                    src={list.gameLogoImage}
+                    alt={list.gameTitle}
+                  />
+                  <h2>{list.gameTitle}</h2>
+                  <p>{list.gameDescription}</p>
+                  <button
+                    type="button"
+                    onClick={() => this.onClickDownload(list.gameId)} // Pass the gameId here
+                  >
+                    Download
+                  </button>
+                </div>
+              ))
+            ) : (
+              <p className="empty-list-msg">No Games For Download</p>
+            )}
           </div>
         </div>
       </>
@@ -158,9 +184,11 @@ class Downloads extends Component {
   }
 
   renderGameDownloadFailureView = () => (
-    <div>
-      <h2>Failed to fetch games. Please try again later.</h2>
-    </div>
+    <img
+      src="https://cdni.iconscout.com/illustration/premium/thumb/man-thinking-about-something-went-wrong-error-illustration-download-in-svg-png-gif-file-formats--result-page-message-empty-states-pack-design-development-illustrations-3780060.png"
+      alt="something went wrong"
+      className="register-prime-img"
+    />
   )
 
   renderLoadingView = () => (

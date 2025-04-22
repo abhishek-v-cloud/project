@@ -167,30 +167,7 @@ class LoginForm extends Component {
     // Save the token to cookies
     Cookies.set('jwt_token', jwtToken, {expires: 30, path: '/'})
 
-    // Decode the token to check user role
-    const decodedToken = JSON.parse(atob(jwtToken.split('.')[1]))
-
-    // Prevent redundant redirects if already on the right page
-    // if (decodedToken.role === 'admin') {
-    //   if (window.location.pathname !== '/adminhome') {
-    //     // Only redirect if not already on admin home
-    //     history.replace('/adminhome')
-    //   }
-    // } else {
-    //   if (window.location.pathname !== '/') {
-    //     // Only redirect if not already on regular home
-    //     history.replace('/')
-    //   }
-    // }
-
-    const {role} = decodedToken
-    const currentPath = window.location.pathname
-
-    if (role === 'admin' && currentPath !== '/adminhome') {
-      history.replace('/adminhome')
-    } else if (role !== 'admin' && currentPath !== '/') {
-      history.replace('/')
-    }
+    history.replace('/') // Default redirect to home
   }
 
   submitForm = async event => {
@@ -279,7 +256,7 @@ class LoginForm extends Component {
     return (
       <div className="login-form-container">
         <img
-          src="https://i.ibb.co/RGGdLKMX/1726222924531-1.png"
+          src="https://i.postimg.cc/SQ2yqbn1/1726222924531-1-1-removebg-preview.png"
           className="login-website-logo-mobile-img"
           alt="website logo"
         />
@@ -290,11 +267,11 @@ class LoginForm extends Component {
         />
         <form className="form-container" onSubmit={this.submitForm}>
           <img
-            src="https://i.ibb.co/RGGdLKMX/1726222924531-1.png"
+            src="https://i.postimg.cc/SQ2yqbn1/1726222924531-1-1-removebg-preview.png"
             className="login-website-logo-desktop-img"
             alt="website logo"
           />
-          <h1>Heaven Games</h1>
+          <h1 className="heaven-games">Heaven Games</h1>
           <div className="input-container">{this.renderUsernameField()}</div>
           <div className="input-container">{this.renderPasswordField()}</div>
           <button type="submit" className="login-button">
@@ -302,9 +279,10 @@ class LoginForm extends Component {
           </button>
 
           {showSubmitError && <p className="error-message">*{errorMsg}</p>}
-          <Link to="/register" className="">
-            <p>Create New Accout</p>
-          </Link>
+
+          <p>
+            Don't have Account? <Link to="/register">Register Here</Link>
+          </p>
         </form>
       </div>
     )

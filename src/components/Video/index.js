@@ -1,5 +1,6 @@
 import {Component} from 'react'
 import {Link} from 'react-router-dom'
+import {BsSearch} from 'react-icons/bs'
 import Loader from 'react-loader-spinner'
 import Cookies from 'js-cookie'
 import Header from '../Header'
@@ -84,33 +85,49 @@ class Video extends Component {
     return (
       <>
         <Header />
-        <div className="event-list">
-          <div className="logo">
-            <div className="search-input-container">
+        <div className="video-container">
+          <div className="join-stream-container">
+            <h1>Watch Gaming Live Stream</h1>
+            <Link to="/livegame/audience">
+              <div className="clickable-container">
+                <p className="join-text">Click here to join the live stream</p>
+              </div>
+            </Link>
+          </div>
+          <div className="video-list-align">
+            <h1> Gaming Videos </h1>
+            <div className="video-search-input-container">
               <input
-                className="search-input"
+                className="video-search-input"
                 type="text"
                 placeholder="Search for a video..."
                 value={searchTerm}
                 onChange={e => this.setState({searchTerm: e.target.value})}
               />
+              <BsSearch className="video-search-icon" />
             </div>
           </div>
-
-          <h1>Video Search</h1>
-          <div className="events">
-            {filteredVideos.map(item => (
-              <div key={item.videoId} className="event-card">
-                <img src={item.videoImageUrl} alt={item.videoTitle} />
-                <h2>{item.videoTitle}</h2>
-                <p>
-                  <strong>Description:</strong> {item.videoDescription}
-                </p>
-                <Link to={`/video/${item.videoId}`}>
-                  <button type="button">Watch Now</button>
-                </Link>
-              </div>
-            ))}
+          <div className="videos">
+            {filteredVideos.length > 0 ? (
+              filteredVideos.map(item => (
+                <div key={item.videoId} className="video-card">
+                  <img
+                    className="video-card-img-logo "
+                    src={item.videoImageUrl}
+                    alt={item.videoTitle}
+                  />
+                  <h2>{item.videoTitle}</h2>
+                  <p>
+                    <strong>Description:</strong> {item.videoDescription}
+                  </p>
+                  <Link to={`/video/${item.videoId}`}>
+                    <button type="button">Watch Now</button>
+                  </Link>
+                </div>
+              ))
+            ) : (
+              <p className="empty-list-msg">No Videos To Watch</p>
+            )}
           </div>
         </div>
       </>
@@ -118,9 +135,11 @@ class Video extends Component {
   }
 
   renderVideoFailureView = () => (
-    <div className="failure-view">
-      <img src="" alt="Error loading videos" className="error-image" />
-    </div>
+    <img
+      src="https://cdni.iconscout.com/illustration/premium/thumb/man-thinking-about-something-went-wrong-error-illustration-download-in-svg-png-gif-file-formats--result-page-message-empty-states-pack-design-development-illustrations-3780060.png"
+      alt="something went wrong"
+      className="register-prime-img"
+    />
   )
 
   renderLoadingView = () => (

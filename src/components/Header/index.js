@@ -1,11 +1,15 @@
+import React, {useState} from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import Cookies from 'js-cookie'
-
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faUserCircle} from '@fortawesome/free-solid-svg-icons'
 import CartContext from '../../context/CartContext'
 
 import './index.css'
 
 const Header = props => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false) // State for toggling mobile menu
+
   const onClickLogout = () => {
     const {history} = props
 
@@ -22,7 +26,7 @@ const Header = props => {
         return (
           <>
             {cartItemsCount > 0 ? (
-              <span className="cart-count-badge">{cartList.length}</span>
+              <span className="cart-count-badge">{cartItemsCount}</span>
             ) : null}
           </>
         )
@@ -30,117 +34,84 @@ const Header = props => {
     </CartContext.Consumer>
   )
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
+
   return (
-    <nav className="nav-header">
-      <div className="nav-content">
-        <div className="nav-bar-mobile-logo-container">
-          <Link to="/" className="link-style">
-            <img
-              className="website-logo"
-              src="https://i.ibb.co/RGGdLKMX/1726222924531-1.png"
-              alt="website logo"
-            />
-            <h1>Heaven Games</h1>
-          </Link>
-
-          <button
-            type="button"
-            className="nav-mobile-btn"
-            onClick={onClickLogout}
-          >
-            <img
-              src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-log-out-img.png"
-              alt="nav logout"
-              className="nav-bar-img"
-            />
-          </button>
-        </div>
-
-        <div className="nav-bar-large-container">
-          <Link to="/" className="link-style">
-            <img
-              className="website-logo"
-              src="https://i.ibb.co/RGGdLKMX/1726222924531-1.png"
-              alt="website logo"
-            />
-            <h1>Heaven Games</h1>
-          </Link>
-          <ul className="nav-menu">
-            <li className="nav-menu-item">
-              <Link to="/" className="nav-link">
-                Home
-              </Link>
-            </li>
-
-            <li className="nav-menu-item">
-              <Link to="/products" className="nav-link">
-                Products
-              </Link>
-            </li>
-
-            <li className="nav-menu-item">
-              <Link to="/cart" className="nav-link">
-                Cart
-                {renderCartItemsCount()}
-              </Link>
-            </li>
-            <li className="nav-menu-item">
-              <Link to="/video" className="nav-link">
-                Video
-              </Link>
-            </li>
-            <li className="nav-menu-item">
-              <Link to="/event" className="nav-link">
-                Event
-              </Link>
-            </li>
-            <li className="nav-menu-item">
-              <Link to="/downloads" className="nav-link">
-                Downloads
-              </Link>
-            </li>
-          </ul>
-          <button
-            type="button"
-            className="logout-desktop-btn"
-            onClick={onClickLogout}
-          >
-            Logout
-          </button>
-        </div>
+    <nav className="navbar">
+      <div className="navbar-left">
+        <Link to="/adminhome">
+          <img
+            className="website-logo"
+            src="https://i.postimg.cc/SQ2yqbn1/1726222924531-1-1-removebg-preview.png"
+            alt="website logo"
+          />
+        </Link>
+        <h1 className="heaven-games">Heaven Games</h1>
       </div>
-      <div className="nav-menu-mobile">
-        <ul className="nav-menu-list-mobile">
-          <li className="nav-menu-item-mobile">
-            <Link to="/" className="nav-link">
-              <img
-                src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-home-icon.png"
-                alt="nav home"
-                className="nav-bar-img"
-              />
-            </Link>
+
+      {/* Navbar center */}
+      <div className={`navbar-center ${isMenuOpen ? 'open' : ''}`}>
+        <ul className="navbar-items">
+          <li>
+            <Link to="/">Home</Link>
           </li>
 
-          <li className="nav-menu-item-mobile">
-            <Link to="/products" className="nav-link">
-              <img
-                src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-products-icon.png"
-                alt="nav products"
-                className="nav-bar-img"
-              />
-            </Link>
+          <li>
+            <Link to="/products">Products</Link>
           </li>
-          <li className="nav-menu-item-mobile">
-            <Link to="/cart" className="nav-link">
-              <img
-                src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-cart-icon.png"
-                alt="nav cart"
-                className="nav-bar-img"
-              />
+
+          <li>
+            <Link to="/cart">
+              Cart
               {renderCartItemsCount()}
             </Link>
           </li>
+          <li>
+            <Link to="/video">Videos</Link>
+          </li>
+          <li>
+            <Link to="/event">Events</Link>
+          </li>
+          <li>
+            <Link to="/downloads">Downloads</Link>
+          </li>
+          <li>
+            <Link to="/playerstats">Player Stats</Link>
+          </li>
+          <li className="hide">
+            <Link to="/profilepage">Profile</Link>
+          </li>
+
+          {/* Logout button moved into the mobile menu */}
+          <li>
+            <button onClick={onClickLogout} className="logout-btn hide">
+              Logout
+            </button>
+          </li>
         </ul>
+      </div>
+
+      {/* Mobile Hamburger Menu */}
+      <Link to="/profilepage" className="header-profile-link">
+        <FontAwesomeIcon
+          icon={faUserCircle}
+          size="xl"
+          className="profile-icon" // Apply margin-right here
+        />
+      </Link>
+      <div className="menu-toggle" onClick={toggleMenu}>
+        <span className="bar"></span>
+        <span className="bar"></span>
+        <span className="bar"></span>
+      </div>
+
+      {/* Navbar Right (Logout button on large screens) */}
+      <div className="navbar-right">
+        <button onClick={onClickLogout} className="logout-btn">
+          Logout
+        </button>
       </div>
     </nav>
   )

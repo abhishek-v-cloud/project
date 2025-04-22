@@ -1,5 +1,8 @@
 .filters-group-container {
   margin-top: 16px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 5px;
 }
 
 @media screen and (min-width: 768px) {
@@ -8,14 +11,15 @@
     max-width: 280px;
     min-width: 240px;
     margin-top: 48px;
-    flex-shrink: 0;
+    height: 100%;
+    padding: 10px;
   }
 }
 
 .search-input-container {
   display: flex;
   align-items: center;
-  background-color: #f1f5f9;
+  background-color: black;
   border-radius: 8px;
   padding-left: 16px;
   padding-top: 8px;
@@ -24,8 +28,8 @@
 }
 
 .search-input {
-  background-color: #f1f5f9;
-  color: #0f172a;
+  background-color: black;
+  color: #ffffff;
   font-family: 'Roboto';
   font-size: 14px;
   font-weight: 500;
@@ -35,7 +39,7 @@
 }
 
 .search-icon {
-  color: #475569;
+  color: #ced4dd;
   width: 20px;
   height: 20px;
 }

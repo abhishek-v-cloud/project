@@ -10,13 +10,12 @@ class EventFormPage extends Component {
     super(props)
     this.state = {
       fullname: '',
-      username: '',
       email: '',
       phone: '',
       showModal: false,
       loading: false,
       errorMessage: '',
-      eventIdList: [], // Initialize as an empty array
+      eventIdList: [],
     }
   }
 
@@ -89,7 +88,7 @@ class EventFormPage extends Component {
     e.preventDefault()
     this.setState({loading: true, errorMessage: ''})
 
-    const {eventIdList, fullname, username, email, phone} = this.state
+    const {eventIdList, fullname, email, phone} = this.state
 
     if (eventIdList.length === 0) {
       this.setState({
@@ -102,7 +101,7 @@ class EventFormPage extends Component {
     const {eventId, eventTitle, eventGame, location} = eventIdList[0]
 
     // Validate input data
-    if (!fullname || !username || !email || !phone) {
+    if (!fullname || !email || !phone) {
       this.setState({errorMessage: 'All fields are required.', loading: false})
       return
     }
@@ -131,7 +130,6 @@ class EventFormPage extends Component {
       eventGame,
       location,
       fullname,
-      username,
       email,
       phone,
     }
@@ -158,7 +156,6 @@ class EventFormPage extends Component {
         this.setState({
           showModal: true,
           fullname: '',
-          username: '',
           email: '',
           phone: '',
         })
@@ -182,14 +179,13 @@ class EventFormPage extends Component {
   handleCloseModal = () => {
     const {history} = this.props
     this.setState({showModal: false})
-    history.push('/event')
+    history.push('/event') // Redirect to the event page after closing the modal
   }
 
   render() {
     const {
       eventIdList,
       fullname,
-      username,
       email,
       phone,
       showModal,
@@ -203,57 +199,56 @@ class EventFormPage extends Component {
     return (
       <>
         <Header />
-        <div className="event-form-container">
-          <h2>Register for {eventTitle}</h2>
-          <form onSubmit={this.handleSubmit}>
-            <input
-              type="text"
-              name="fullname"
-              placeholder="Full Name"
-              value={fullname}
-              onChange={this.handleChange}
-              required
-            />
-            <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              value={username}
-              onChange={this.handleChange}
-              required
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={email}
-              onChange={this.handleChange}
-              required
-            />
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Phone Number"
-              value={phone}
-              onChange={this.handleChange}
-              required
-            />
-            <button type="submit" disabled={loading}>
-              {loading ? 'Submitting...' : 'Submit'}
-            </button>
-          </form>
+        <div className="blurred-container">
+          <div className="event-form-container">
+            <h2>Register for {eventTitle}</h2>
+            <form onSubmit={this.handleSubmit}>
+              <input
+                type="text"
+                name="fullname"
+                placeholder="Full Name"
+                value={fullname}
+                onChange={this.handleChange}
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={email}
+                onChange={this.handleChange}
+                required
+              />
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Phone Number"
+                value={phone}
+                onChange={this.handleChange}
+                required
+              />
+              <button type="submit" disabled={loading}>
+                {loading ? 'Submitting...' : 'Submit'}
+              </button>
+            </form>
 
-          {errorMessage && <p className="error-message">{errorMessage}</p>}
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-          {showModal && (
-            <div className="modal">
-              <div className="modal-content">
-                <h2>Thank You!</h2>
-                <p>Thank you for participating in {eventTitle}!</p>
-                <button onClick={this.handleCloseModal}>Close</button>
+            {showModal && (
+              <div className="modal">
+                <div className="modal-content">
+                  <h2>Thank You!</h2>
+                  <p>Thank you for participating in {eventTitle}!</p>
+                  <button
+                    className="modal-close-button"
+                    onClick={this.handleCloseModal}
+                  >
+                    Close
+                  </button>
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </>
     )

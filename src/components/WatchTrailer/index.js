@@ -88,7 +88,7 @@ class WatchTrailer extends Component {
       <>
         <Header />
         {trailerIdList.map(item => (
-          <div key={item.trailerId}>
+          <div key={item.trailerId} className="watch-trailer-player-container">
             <ReactPlayer
               url={item.trailerVideoUrl}
               controls
@@ -97,7 +97,6 @@ class WatchTrailer extends Component {
             />
             <h1>{item.trailerTitle}</h1>
             <p>{item.trailerDescription}</p>
-            <p>Posted on</p>
             <Link to="/">
               <button type="button">Back</button>
             </Link>
@@ -108,7 +107,11 @@ class WatchTrailer extends Component {
   }
 
   renderTrailerIdFailureView = () => (
-    <img src="" alt="Register Prime" className="register-prime-image" />
+    <img
+      src="https://cdni.iconscout.com/illustration/premium/thumb/man-thinking-about-something-went-wrong-error-illustration-download-in-svg-png-gif-file-formats--result-page-message-empty-states-pack-design-development-illustrations-3780060.png"
+      alt="something went wrong"
+      className="register-prime-img"
+    />
   )
 
   renderLoadingView = () => (

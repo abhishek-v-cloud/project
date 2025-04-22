@@ -1,3 +1,6 @@
+.trailer-main-text {
+  margin-left: 10%;
+}
 .container {
   position: relative; /* Change from absolute to relative */
   margin: 30px auto;
@@ -6,7 +9,6 @@
   padding: 50px;
   background-color: rgb(8, 1, 1);
   box-shadow: 0 30px 50px #443939;
-  border: 2px solid #1ed130;
   display: flex;
 }
 

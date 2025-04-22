@@ -208,13 +208,17 @@ class ProductItemDetails extends Component {
                     <BsPlusSquare className="quantity-controller-icon" />
                   </button>
                 </div>
-                <button
-                  type="button"
-                  className="button add-to-cart-btn"
-                  onClick={onClickAddToCart}
-                >
-                  ADD TO CART
-                </button>
+                {availability === 'In Stock' ? (
+                  <button
+                    type="button"
+                    className="button add-to-cart-btn"
+                    onClick={onClickAddToCart}
+                  >
+                    ADD TO CART
+                  </button>
+                ) : (
+                  <p className="label">Out of Stock</p>
+                )}
               </div>
             </div>
             <h1 className="similar-products-heading">Similar Products</h1>

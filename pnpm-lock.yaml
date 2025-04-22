@@ -5,7 +5,9 @@ dependencies:
   '@testing-library/jest-dom': 5.11.9
   '@testing-library/react': 11.2.5_react-dom@17.0.1+react@17.0.1
   '@testing-library/user-event': 12.6.2
+  '@zegocloud/zego-uikit-prebuilt': 2.14.2
   chalk: 4.1.0
+  framer-motion: 10.18.0_react-dom@17.0.1+react@17.0.1
   js-cookie: 2.2.1
   react: 17.0.1
   react-dom: 17.0.1_react@17.0.1
@@ -1377,6 +1379,18 @@ packages:
     dev: true
     resolution:
       integrity: sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
+  /@emotion/is-prop-valid/0.8.8:
+    dependencies:
+      '@emotion/memoize': 0.7.4
+    dev: false
+    optional: true
+    resolution:
+      integrity: sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==
+  /@emotion/memoize/0.7.4:
+    dev: false
+    optional: true
+    resolution:
+      integrity: sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==
   /@eslint/eslintrc/0.4.2:
     dependencies:
       ajv: 6.12.6
@@ -2423,6 +2437,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
+  /@zegocloud/zego-uikit-prebuilt/2.14.2:
+    dev: false
+    resolution:
+      integrity: sha512-7RlONVnQ4fLQ00sf+VtwgXSBaQo4ADMgiX6mnvsXWyJZGQLRyUY+d2OWW1uH3tVpP+umIAxpC3YYkdlxwDahFQ==
   /abab/2.0.5:
     dev: true
     resolution:
@@ -5628,6 +5646,24 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-QpD60n8T6Jvn8zeZxrxaCr//DRk=
+  /framer-motion/10.18.0_react-dom@17.0.1+react@17.0.1:
+    dependencies:
+      react: 17.0.1
+      react-dom: 17.0.1_react@17.0.1
+      tslib: 2.8.1
+    dev: false
+    optionalDependencies:
+      '@emotion/is-prop-valid': 0.8.8
+    peerDependencies:
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    resolution:
+      integrity: sha512-oGlDh1Q1XqYPksuTD/usb0I70hq95OUzmL9+6Zd+Hs4XV0oaISBa/UUMSjYiq6m8EUF32132mOJ8xVZS+I0S6w==
   /fresh/0.5.2:
     dev: true
     engines:
@@ -11732,6 +11768,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==
+  /tslib/2.8.1:
+    dev: false
+    resolution:
+      integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==
   /tsutils/3.21.0:
     dependencies:
       tslib: 1.14.1
@@ -12659,10 +12699,12 @@ specifiers:
   '@testing-library/jest-dom': 5.11.9
   '@testing-library/react': 11.2.5
   '@testing-library/user-event': 12.6.2
+  '@zegocloud/zego-uikit-prebuilt': ^2.14.1-beta
   chalk: 4.1.0
   eslint-config-airbnb: 18.2.1
   eslint-config-prettier: 8.1.0
   eslint-plugin-prettier: 3.3.1
+  framer-motion: '10'
   husky: 4.3.8
   js-cookie: 2.2.1
   lint-staged: 10.5.4

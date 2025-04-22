@@ -86,7 +86,7 @@ class WatchVideo extends Component {
       <>
         <Header />
         {videoIdList.map(item => (
-          <div key={item.videoId}>
+          <div key={item.videoId} className="watch-video-player-container">
             <ReactPlayer
               url={item.videoUrl}
               controls
@@ -95,7 +95,6 @@ class WatchVideo extends Component {
             />
             <h1>{item.videoTitle}</h1>
             <p>{item.videoDescription}</p>
-            <p>Posted on</p>
             <Link to="/video">
               <button type="button">Back</button>
             </Link>
@@ -106,7 +105,11 @@ class WatchVideo extends Component {
   }
 
   renderVideoIdFailureView = () => (
-    <img src="" alt="Register Prime" className="register-prime-image" />
+    <img
+      src="https://cdni.iconscout.com/illustration/premium/thumb/man-thinking-about-something-went-wrong-error-illustration-download-in-svg-png-gif-file-formats--result-page-message-empty-states-pack-design-development-illustrations-3780060.png"
+      alt="something went wrong"
+      className="register-prime-img"
+    />
   )
 
   renderLoadingView = () => (

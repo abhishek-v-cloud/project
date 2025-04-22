@@ -1,7 +1,6 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import {Link, Redirect} from 'react-router-dom'
-// import {Link, withRouter} from 'react-router-dom'
 
 import './index.css'
 
@@ -133,7 +132,7 @@ class RegisterForm extends Component {
     return (
       <div className="login-form-container">
         <img
-          src="https://i.ibb.co/RGGdLKMX/1726222924531-1.png"
+          src="https://i.postimg.cc/SQ2yqbn1/1726222924531-1-1-removebg-preview.png"
           className="login-website-logo-mobile-image"
           alt="website logo"
         />
@@ -144,11 +143,11 @@ class RegisterForm extends Component {
         />
         <form className="form-container" onSubmit={this.registerForm}>
           <img
-            src="https://i.ibb.co/RGGdLKMX/1726222924531-1.png"
+            src="https://i.postimg.cc/SQ2yqbn1/1726222924531-1-1-removebg-preview.png"
             className="login-website-logo-desktop-image"
             alt="website logo"
           />
-          <h1>Heaven Games</h1>
+          <h1 className="heaven-games">Heaven Games</h1>
           <div className="input-container">{this.renderFullnameField()}</div>
           <div className="input-container">{this.renderUsernameField()}</div>
           <div className="input-container">{this.renderPasswordField()}</div>
@@ -156,9 +155,9 @@ class RegisterForm extends Component {
             Create Account
           </button>
           {showSubmitError && <p className="error-message">*{errorMsg}</p>}
-          <Link to="/login" className="">
-            Login
-          </Link>
+          <p>
+            Already have Account? <Link to="/login">Login Here</Link>
+          </p>
         </form>
       </div>
     )

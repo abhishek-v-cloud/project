@@ -1,224 +1,229 @@
-// import React, {Component} from 'react'
-// import {Redirect} from 'react-router-dom'
-// import Cookies from 'js-cookie'
-
-// class AdminHome extends Component {
-//   constructor(props) {
-//     super(props)
-//     this.state = {
-//       isAdmin: null, // null means it's still checking for token
-//     }
-//   }
-
-//   componentDidMount() {
-//     const token = Cookies.get('jwt_token')
-//     if (token) {
-//       try {
-//         const decodedToken = JSON.parse(atob(token.split('.')[1])) // Decode JWT token
-//         console.log(decodedToken) // Check if the decoded token has the correct role
-//         if (decodedToken.role === 'admin') {
-//           this.setState({isAdmin: true}) // Set isAdmin to true if the user is admin
-//         } else {
-//           this.setState({isAdmin: false}) // Set isAdmin to false if the user is not an admin
-//         }
-//       } catch (error) {
-//         console.error('Error decoding token', error)
-//         this.setState({isAdmin: false}) // In case of an error, assume not an admin
-//       }
-//     } else {
-//       // No token, user is not logged in
-//       this.setState({isAdmin: false})
-//     }
-//   }
-
-//   handleLogout = () => {
-//     // Remove JWT token from cookies
-//     Cookies.remove('jwt_token')
-
-//     // Redirect to login page after logout
-//     this.setState({isAdmin: false})
-//   }
-
-//   render() {
-//     const {isAdmin} = this.state
-
-//     // Wait until the token status (isAdmin) is determined before rendering
-//     if (isAdmin === null) {
-//       return <div>Loading...</div> // You can show a loading spinner or any indicator
-//     }
-
-//     if (!isAdmin) {
-//       return <Redirect to="/login" /> // Redirect to login if the user is not admin
-//     }
-
-//     return (
-//       <div>
-//         <h1>Welcome to Admin Home</h1>
-//         {/* Admin-specific content */}
-//         <button onClick={this.handleLogout}>Logout</button>
-//       </div>
-//     )
-//   }
-// }
-
-// export default AdminHome
-import React, {Component} from 'react'
-import {Redirect} from 'react-router-dom'
+import React, {useEffect, useState} from 'react'
 import Cookies from 'js-cookie'
+import AdminHeader from '../AdminHeader'
+import './Adminindex.css' // Add your CSS styles
 
-class AdminHome extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isAdmin: null, // null means it's still checking for token
-      file: null, // File to be uploaded
-      gameName: '', // Game name
-      gameDescription: '', // Game description
-      gameLogoUrl: '', // Game logo URL
-      loading: false, // For loading state
-    }
-  }
+const AdminHome = () => {
+  const [users, setUsers] = useState([])
+  const [admins, setAdmins] = useState([])
+  const [searchQuery, setSearchQuery] = useState('')
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(true)
 
-  // Check the token and user role (admin check)
-  componentDidMount() {
-    const token = Cookies.get('jwt_token')
-    if (token) {
-      try {
-        const decodedToken = JSON.parse(atob(token.split('.')[1])) // Decode JWT token
-        if (decodedToken.role === 'admin') {
-          this.setState({isAdmin: true}) // Set isAdmin to true if the user is admin
-        } else {
-          this.setState({isAdmin: false}) // Set isAdmin to false if the user is not an admin
-        }
-      } catch (error) {
-        console.error('Error decoding token', error)
-        this.setState({isAdmin: false}) // Assume not admin if error
+  useEffect(() => {
+    const fetchUsersAndAdmins = async () => {
+      const jwtToken = Cookies.get('jwt_token') // Retrieve JWT token
+
+      if (!jwtToken) {
+        setError('JWT token is missing')
+        setLoading(false)
+        return
       }
-    } else {
-      this.setState({isAdmin: false}) // No token, not logged in
-    }
-  }
 
-  // Handle file selection
-  handleFileChange = e => {
-    this.setState({file: e.target.files[0]})
-  }
+      try {
+        const response = await fetch('http://localhost:3001/admin/users', {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${jwtToken}`, // Send token here
+            'Content-Type': 'application/json',
+          },
+        })
 
-  // Handle form input changes (game name, description, and logo URL)
-  handleInputChange = e => {
-    const {name, value} = e.target
-    this.setState({[name]: value})
-  }
+        if (!response.ok) {
+          const errorData = await response.json()
+          throw new Error(errorData.message || 'Failed to fetch data')
+        }
 
-  // Handle file upload
-  handleUpload = async () => {
-    const {file, gameName, gameDescription, gameLogoUrl} = this.state
-
-    if (!file || !gameName || !gameDescription || !gameLogoUrl) {
-      alert(
-        'Please provide game name, description, logo URL, and select a file',
-      )
-      return
+        const data = await response.json()
+        setUsers(data.users)
+        setAdmins(data.admins)
+      } catch (err) {
+        setError(err.message)
+      } finally {
+        setLoading(false)
+      }
     }
 
-    const token = Cookies.get('jwt_token') // Get JWT token from cookies
-    const formData = new FormData()
-    formData.append('file', file)
-    formData.append('game_name', gameName)
-    formData.append('game_description', gameDescription)
-    formData.append('game_logo_url', gameLogoUrl)
+    fetchUsersAndAdmins()
+  }, [])
+
+  const handleRoleChange = async (userId, newRole) => {
+    const jwtToken = Cookies.get('jwt_token')
 
     try {
-      this.setState({loading: true})
-
-      // Send POST request to upload the file
-      const response = await fetch('http://localhost:3001/upload', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`, // Add JWT token to Authorization header
+      const response = await fetch(
+        `http://localhost:3001/admin/users/${userId}/role`,
+        {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({newRole}),
         },
-        body: formData, // Attach the file and additional form data
-      })
+      )
 
-      if (response.ok) {
-        alert('File uploaded and game details saved successfully')
-        this.setState({
-          file: null,
-          gameName: '',
-          gameDescription: '',
-          gameLogoUrl: '',
-        }) // Reset form fields
-      } else {
+      if (!response.ok) {
         const errorData = await response.json()
-        alert(`Error: ${errorData.message}`)
+        throw new Error(errorData.message || 'Failed to update role')
       }
+
+      alert('Role updated successfully')
+      window.location.reload() // Reload the page to refresh the data
     } catch (err) {
-      console.error('Upload error:', err)
-      alert('Error uploading file. Please try again.')
-    } finally {
-      this.setState({loading: false})
+      alert(`Error: ${err.message}`)
     }
   }
 
-  // Handle logout action
-  handleLogout = () => {
-    // Remove JWT token from cookies
-    Cookies.remove('jwt_token')
-    // Redirect to login page after logout
-    this.setState({isAdmin: false})
+  const handleSearch = e => {
+    setSearchQuery(e.target.value.toLowerCase())
   }
 
-  render() {
-    const {isAdmin, loading, gameName, gameDescription, gameLogoUrl} =
-      this.state
+  const filteredAdmins = admins.filter(admin =>
+    admin.user_name.toLowerCase().includes(searchQuery),
+  )
 
-    // Wait until the token status (isAdmin) is determined before rendering
-    if (isAdmin === null) {
-      return <div>Loading...</div>
-    }
+  const filteredUsers = users.filter(user =>
+    user.user_name.toLowerCase().includes(searchQuery),
+  )
 
-    if (!isAdmin) {
-      return <Redirect to="/login" /> // Redirect to login if the user is not admin
-    }
+  if (loading) return <div>Loading...</div>
+  if (error) return <div>Error: {error}</div>
 
-    return (
-      <div>
-        <h1>Welcome to Admin Home</h1>
+  return (
+    <>
+      <AdminHeader />
+      <div className="admin-dashboard-container">
+        <h1 className="admin-dashboard-header">
+          Welcome to the Admin Dashboard
+        </h1>
 
-        {/* Upload Form */}
-        <div>
+        <div className="admin-upload-input-card">
           <input
             type="text"
-            name="gameName"
-            value={gameName}
-            onChange={this.handleInputChange}
-            placeholder="Game Name"
+            placeholder="Search by username..."
+            value={searchQuery}
+            onChange={handleSearch}
+            className="admin-upload-input-item"
           />
-          <input
-            type="text"
-            name="gameDescription"
-            value={gameDescription}
-            onChange={this.handleInputChange}
-            placeholder="Game Description"
-          />
-          <input
-            type="text"
-            name="gameLogoUrl"
-            value={gameLogoUrl}
-            onChange={this.handleInputChange}
-            placeholder="Game Logo URL"
-          />
-          <input type="file" onChange={this.handleFileChange} />
-          <button onClick={this.handleUpload} disabled={loading}>
-            {loading ? 'Uploading...' : 'Upload File'}
-          </button>
         </div>
 
-        {/* Logout Button */}
-        <button onClick={this.handleLogout}>Logout</button>
+        {/* Admins Table */}
+        <div className="admin-dashboard-table-container">
+          <h3>Admins</h3>
+          <table className="admin-dashboard-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredAdmins.map(admin => (
+                <tr key={admin.user_id}>
+                  <td>{admin.user_id}</td>
+                  <td>{admin.user_name}</td>
+                  <td>{admin.role}</td>
+                  <td>
+                    <button
+                      onClick={() => handleRoleChange(admin.user_id, 'user')}
+                    >
+                      Make User
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Users Table */}
+        <div className="admin-dashboard-table-container">
+          <h3>Users</h3>
+          <table className="admin-dashboard-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredUsers.map(user => (
+                <tr key={user.user_id}>
+                  <td>{user.user_id}</td>
+                  <td>{user.user_name}</td>
+                  <td>{user.role}</td>
+                  <td>
+                    <button
+                      onClick={() => handleRoleChange(user.user_id, 'admin')}
+                    >
+                      Make Admin
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    )
-  }
+    </>
+  )
 }
 
 export default AdminHome
+
+// import {useEffect, useState} from 'react'
+// import Cookies from 'js-cookie'
+// import {Redirect, useHistory, Link} from 'react-router-dom'
+// import AdminHeader from '../AdminHeader'
+// import './Adminindex.css' // Ensure you have this CSS file or use inline styles
+
+// const AdminHome = () => {
+//   const [isAdmin, setIsAdmin] = useState(null) // Tracks if the user is admin
+//   const history = useHistory()
+
+//   useEffect(() => {
+//     const jwtToken = Cookies.get('jwt_token') // Get token from cookies
+//     if (jwtToken) {
+//       const decodedToken = JSON.parse(atob(jwtToken.split('.')[1])) // Decode token to get role
+//       if (decodedToken.role === 'admin') {
+//         setIsAdmin(true) // If role is admin, set isAdmin to true
+//       } else {
+//         setIsAdmin(false) // If not admin, set isAdmin to false
+//       }
+//     } else {
+//       setIsAdmin(false) // No token, not an admin
+//     }
+//   }, [])
+
+//   const onClickLogout = () => {
+//     Cookies.remove('jwt_token') // Remove JWT token from cookies
+//     history.replace('/login') // Redirect to login
+//   }
+
+//   if (isAdmin === null) {
+//     return <div>Loading...</div> // Wait while checking token and role
+//   }
+
+//   if (isAdmin === false) {
+//     return <Redirect to="/login" /> // Redirect to login if not admin
+//   }
+
+//   return (
+//     <div className="admin-home">
+//       {/* Navbar */}
+//       <AdminHeader />
+//       {/* Admin Home Content */}
+//       <div className="admin-home-content">
+//         <h1>Welcome to the Admin Home</h1>
+//         <p>This page is only accessible by admin users.</p>
+//       </div>
+//     </div>
+//   )
+// }
+
+// export default AdminHome

@@ -30,6 +30,7 @@
 
 .login-img {
   width: 278px;
+  border-radius: 10px;
 }
 
 @media screen and (min-width: 992px) {
@@ -59,6 +60,10 @@
   border-radius: 8px;
   width: 100%;
   max-width: 350px;
+}
+
+.heaven-games {
+  font-family: 'Bree Serif';
 }
 
 @media screen and (min-width: 992px) {
