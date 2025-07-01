@@ -1,5 +1,2 @@
-# React Context Part | 4
+# Heaven Games
 
-- Empty Cart View
-- Displaying Cart Items Count
-- Deployment
