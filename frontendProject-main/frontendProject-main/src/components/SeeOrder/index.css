@@ -1,0 +1,78 @@
+.admin-orders {
+  width: 100%;
+  margin: auto;
+  padding: 20px 50px;
+  background-color: #19b8ee;
+  font-family: 'Roboto';
+  min-height: 100vh;
+}
+
+.admin-orders-orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #f4f4f4;
+}
+
+.admin-orders-orders-table th,
+.admin-orders-orders-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.admin-orders-orders-table th {
+  background-color: #ca9e9e;
+  text-align: left;
+}
+
+.admin-orders-orders-table input,
+.admin-orders-orders-table select {
+  padding: 4px;
+  width: 100%;
+}
+
+.admin-orders-orders-table button {
+  padding: 6px 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.admin-orders-orders-table button:hover {
+  background-color: #45a049;
+}
+
+.admin-orders-orders-table ul {
+  padding-left: 16px;
+  margin: 0;
+}
+
+.admin-orders-card-align {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-orders-upload-input-card {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 8px;
+  padding-left: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-right: 16px;
+  width: 250px;
+}
+
+.admin-orders-upload-input-item {
+  background-color: white;
+  color: black;
+  font-family: 'Roboto';
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  flex-grow: 1;
+}

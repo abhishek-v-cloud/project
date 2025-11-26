@@ -1,0 +1,152 @@
+.product-management-container {
+  width: 100%;
+  margin: auto;
+  padding: 20px 120px;
+  background-color: #19b8ee;
+  font-family: 'Roboto';
+}
+
+.product-management-container h2 {
+  text-align: center;
+}
+
+.product-form1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 30px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.product-form1 div {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-form1 label {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.product-form1 input {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.product-form1 button {
+  grid-column: span 2;
+  padding: 10px 15px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.product-form1 button:hover {
+  background-color: #45a049;
+}
+
+.product-list1 {
+  list-style: none;
+  padding: 0;
+}
+
+.product-item1 {
+  background-color: #fff;
+  padding: 16px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.product-item1 h3 {
+  margin: 0 0 5px;
+}
+
+.product-item1 p {
+  margin: 5px 0;
+}
+
+.product-item1 img {
+  display: block;
+  margin-top: 10px;
+  border-radius: 4px;
+}
+
+.product-item1 button {
+  margin-right: 10px;
+  padding: 6px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.product-item1 button:first-of-type {
+  background-color: #2196f3;
+  color: white;
+}
+
+.product-item1 button:first-of-type:hover {
+  background-color: #1976d2;
+}
+
+.product-item1 button:last-of-type {
+  background-color: #f44336;
+  color: white;
+}
+
+.product-item1 button:last-of-type:hover {
+  background-color: #d32f2f;
+}
+
+input[type='text'],
+input[type='number'] {
+  width: 100%;
+}
+
+input::placeholder {
+  color: #aaa;
+}
+
+@media screen and (max-width: 768px) {
+  .product-form1 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.upload-card-align {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.upload-input-card {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 8px;
+  padding-left: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-right: 16px;
+  width: 250px;
+}
+
+.upload-input-item {
+  background-color: white;
+  color: black;
+  font-family: 'Roboto';
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  flex-grow: 1;
+}

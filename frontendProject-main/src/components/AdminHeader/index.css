@@ -1,0 +1,139 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  padding: 10px 20px;
+  color: rgb(181, 205, 226);
+  border-bottom: 1px solid rgb(181, 205, 226);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.website-logo {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.navbar-center {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.navbar-items {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar-items li {
+  margin-left: 20px;
+}
+
+.navbar-items li a {
+  color: rgb(189, 210, 227);
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+  font-family: 'Tilt Prism', sans-serif;
+  font-weight: 700;
+}
+
+.navbar-items li a:hover {
+  background-color: #555;
+  border-radius: 5px;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.logout-btn {
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-family: 'Roboto';
+  font-weight: 600;
+  font-size: 14px;
+  color: #ffffff;
+  background-color: #0967d2;
+  outline: none;
+}
+
+@media (min-width: 768px) {
+  .hide {
+    display: none;
+  }
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.menu-toggle .bar {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .navbar-center {
+    display: none;
+    width: 100%;
+    text-align: center;
+    background-color: black;
+    position: absolute;
+    top: 60px;
+    left: 0;
+  }
+
+  .navbar-center.open {
+    display: block; 
+  }
+
+  .navbar-items {
+    flex-direction: column;
+  }
+
+  .navbar-items li {
+    margin: 10px 0;
+  }
+
+  .menu-toggle {
+    display: flex; 
+  }
+
+  .navbar-right {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .navbar-right {
+    display: flex; 
+  }
+}
+
+.profile-icon {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+@media (max-width: 769px) {
+  .profile-icon {
+    display: none; 
+  }
+}

@@ -1,0 +1,14 @@
+.host-live-conatiner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #19b8ee;
+  color: black;
+  min-height: 90vh;
+  text-align: center;
+}
+
+.streaming-card {
+  margin-top: 20px;
+  min-width: 1000px;
+}
